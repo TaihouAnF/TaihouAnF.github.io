@@ -14,6 +14,12 @@ document.getElementById('game-container').appendChild(app.view);
 // Your game logic here...
 
 // Load and display your game assets (textures, sprites, etc.)
+const character = new PIXI.Sprite(PIXI.Texture.from('assets/character.png'));
+character.anchor.set(0.5);
+character.x = app.screen.width / 2;
+character.y = app.screen.height / 2;
+app.stage.addChild(character);
+
 
 // Handle player interactions and movement
 
