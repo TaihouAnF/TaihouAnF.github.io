@@ -1,35 +1,24 @@
 import './style.css'
-const PIXI = require('pixi.js');
+import javascriptLogo from './javascript.svg'
+import viteLogo from '/vite.svg'
+import { setupCounter } from './counter.js'
 
-// Create a PixiJS application
-const app = new PIXI.Application({
-    width: window.innerWidth,
-    height: window.innerHeight,
-    backgroundColor: 0x1099bb,
-});
+document.querySelector('#app').innerHTML = `
+  <div>
+    <a href="https://vitejs.dev" target="_blank">
+      <img src="${viteLogo}" class="logo" alt="Vite logo" />
+    </a>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
+      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
+    </a>
+    <h1>Hello Vite!</h1>
+    <div class="card">
+      <button id="counter" type="button"></button>
+    </div>
+    <p class="read-the-docs">
+      Click on the Vite logo to learn more
+    </p>
+  </div>
+`
 
-// Add the PixiJS canvas to the game-container div
-document.getElementById('game-container').appendChild(app.view);
-
-// Your game logic here...
-
-// Load and display your game assets (textures, sprites, etc.)
-const character = new PIXI.Sprite(PIXI.Texture.from('assets/character.png'));
-character.anchor.set(0.5);
-character.x = app.screen.width / 2;
-character.y = app.screen.height / 2;
-app.stage.addChild(character);
-
-
-// Handle player interactions and movement
-
-// Show information about you when the player enters different areas
-
-// Example: When clicking on the "Contact" area, show contact info
-document.getElementById('contact-info').addEventListener('click', () => {
-    // Display contact information or trigger game logic
-    alert('Contact information goes here.');
-});
-
-// Start the PixiJS application
-app.start();
+setupCounter(document.querySelector('#counter'))
