@@ -54,22 +54,22 @@ app.ticker.add(() => {
     }
 });
 
+const clickableSprite = new PIXI.Sprite(PIXI.Texture.from('clickable.png'));
+clickableSprite.visible = false; // Initially hidden
+app.stage.addChild(clickableSprite);
 
-// // Enable interactive mode for the character
-// character.interactive = true;
-// character.buttonMode = true;
+const proximityThreshold = 100; // Adjust this value as needed
+const targetLocation = { x: 400, y: 300 }; // Replace with your target coordinates
 
-// // Define a function to handle character movement
-// function handleCharacterMovement(event) {
-//     character.x = event.data.global.x;
-//     character.y = event.data.global.y;
-// }
+function isPlayerNearLocation(playerX, playerY, targetX, targetY) {
+    const distance = Math.sqrt(Math.pow(playerX - targetX, 2) + Math.pow(playerY - targetY, 2));
+    return distance < proximityThreshold;
+}
 
-// // Listen for pointer (mouse or touch) events to move the character
-// character.on('pointerdown', handleCharacterMovement);
-// character.on('pointermove', handleCharacterMovement);
+app.ticker.add(() => {
+    // Check player's proximity to the target location
+    const playerNearLocation = isPlayerNearLocation(player.x, player.y, targetLocation.x, targetLocation.y);
 
-// // Animate the character (optional)
-// app.ticker.add(() => {
-//     // Add your character animation or game logic here
-// });
+    // Show or hide clickable sprites accordingly
+    clickableSprite.visible = playerNearLocation;
+});
