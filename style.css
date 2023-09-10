@@ -116,7 +116,7 @@ body, html {
 
 /* Optionally set a background color or image for the webpage */
 body {
-  background-color: #f0f0f0; /* Replace with your desired background color */
+  /* background-color: #f0f0f0; Replace with your desired background color */
   /* background-image: url('your-background-image.jpg'); */ /* Uncomment and specify your background image URL */
   background-size: cover; /* Adjust as needed */
   background-repeat: no-repeat;
