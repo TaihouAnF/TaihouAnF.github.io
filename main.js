@@ -48,7 +48,7 @@ app.ticker.add(() => {
     }
 });
 
-const clickableSprite = new PIXI.Sprite(PIXI.Texture.from('clickable.png'));
+const clickableSprite = new PIXI.Sprite(PIXI.Texture.from('github-mark-white.png'));
 clickableSprite.visible = false; // Initially hidden
 app.stage.addChild(clickableSprite);
 
