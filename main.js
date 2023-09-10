@@ -8,6 +8,12 @@ const app = new PIXI.Application({
 
 document.body.appendChild(app.view);
 
+const background = new PIXI.Sprite(PIXI.Texture.from('background.png'));
+background.anchor.set(0.5);
+background.x = app.screen.width / 2;
+background.y = app.screen.height / 2;
+app.stage.addChild(background);
+
 const character = new PIXI.Sprite(PIXI.Texture.from('taihou.png'));
 character.anchor.set(0.5);
 character.x = app.screen.width / 2;
@@ -48,22 +54,22 @@ app.ticker.add(() => {
     }
 });
 
-const clickableSprite = new PIXI.Sprite(PIXI.Texture.from('github-mark-white.png'));
-clickableSprite.visible = false; // Initially hidden
-app.stage.addChild(clickableSprite);
+// const clickableSprite = new PIXI.Sprite(PIXI.Texture.from('clickable.png'));
+// clickableSprite.visible = false; // Initially hidden
+// app.stage.addChild(clickableSprite);
 
-const proximityThreshold = 100; // Adjust this value as needed
-const targetLocation = { x: 400, y: 300 }; // Replace with your target coordinates
+// const proximityThreshold = 100; // Adjust this value as needed
+// const targetLocation = { x: 400, y: 300 }; // Replace with your target coordinates
 
-function isPlayerNearLocation(playerX, playerY, targetX, targetY) {
-    const distance = Math.sqrt(Math.pow(playerX - targetX, 2) + Math.pow(playerY - targetY, 2));
-    return distance < proximityThreshold;
-}
+// function isPlayerNearLocation(playerX, playerY, targetX, targetY) {
+//     const distance = Math.sqrt(Math.pow(playerX - targetX, 2) + Math.pow(playerY - targetY, 2));
+//     return distance < proximityThreshold;
+// }
 
-app.ticker.add(() => {
-    // Check player's proximity to the target location
-    const playerNearLocation = isPlayerNearLocation(player.x, player.y, targetLocation.x, targetLocation.y);
+// app.ticker.add(() => {
+//     // Check player's proximity to the target location
+//     const playerNearLocation = isPlayerNearLocation(player.x, player.y, targetLocation.x, targetLocation.y);
 
-    // Show or hide clickable sprites accordingly
-    clickableSprite.visible = playerNearLocation;
-});
+//     // Show or hide clickable sprites accordingly
+//     clickableSprite.visible = playerNearLocation;
+// });
