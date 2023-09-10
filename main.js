@@ -36,19 +36,27 @@ window.addEventListener('keyup', (e) => {
 });
 
 const githubClickableSprite = new PIXI.Sprite(PIXI.Texture.from('github-mark-white.png'));
-githubClickableSprite.visible = true; // Initially hidden
 githubClickableSprite.anchor.set(0.5);
-githubClickableSprite.x = app.screen.width / 2 + 50;
-githubClickableSprite.y = app.screen.height / 2 + 10;
+githubClickableSprite.x = app.screen.width / 2 + 100;
+githubClickableSprite.y = app.screen.height / 2 + 200;
 app.stage.addChild(githubClickableSprite);
 
-const proximityThreshold = 100; // Adjust this value as needed
-const targetLocation = { x: githubClickableSprite.x, y: githubClickableSprite.y }; // Replace with your target coordinates
+// const proximityThreshold = 0; // Adjust this value as needed
+// const targetLocation = { x: githubClickableSprite.x, y: githubClickableSprite.y }; // Replace with your target coordinates
 
-function isPlayerNearLocation(playerX, playerY, targetX, targetY) {
-    const distance = Math.sqrt(Math.pow(playerX - targetX, 2) + Math.pow(playerY - targetY, 2));
-    return distance < proximityThreshold;
-}
+// function isPlayerNearLocation(playerX, playerY, targetX, targetY) {
+//     const distance = Math.sqrt(Math.pow(playerX - targetX, 2) + Math.pow(playerY - targetY, 2));
+//     return distance < proximityThreshold;
+// }
+
+githubClickableSprite.interactive = true;
+githubClickableSprite.buttonMode = true;
+
+githubClickableSprite.on('pointerdown', () => {
+    // Handle the click event here
+    window.location.href = 'https://github.com/TaihouAnF';
+    console.log('Clickable sprite clicked!');
+});
 
 // Create a game loop to update character position
 app.ticker.add(() => {
@@ -67,11 +75,5 @@ app.ticker.add(() => {
     if (keys['d'] || keys['ArrowRight']) {
         character.x += characterSpeed;
     }
-
-    // const playerNearLocation = isPlayerNearLocation(player.x, player.y, targetLocation.x, targetLocation.y);
-
-    // if (playerNearLocation) {
-    //     githubClickableSprite.visible = true;
-    // }
 });
 
