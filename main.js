@@ -14,7 +14,7 @@ background.x = app.screen.width / 2;
 background.y = app.screen.height / 2;
 app.stage.addChild(background);
 
-const character = new PIXI.Sprite(PIXI.Texture.from('pic/taihou.png'));
+const character = new PIXI.Sprite(PIXI.Texture.from('taihou.png'));
 character.anchor.set(0.5);
 character.x = app.screen.width / 2;
 character.y = app.screen.height / 2;
