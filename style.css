@@ -101,7 +101,7 @@ button:focus-visible {
 body, html {
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Prevent horizontal and vertical scrolling */
+  overflow: hidden; /*Prevent horizontal and vertical scrollingq */
   width: 100%;
   height: 100%;
 }
