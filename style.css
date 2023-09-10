@@ -1,4 +1,4 @@
-:root {
+/* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -94,4 +94,31 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+} */
+
+
+/* Reset some default browser styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent horizontal and vertical scrolling */
+  width: 100%;
+  height: 100%;
+}
+
+/* Center the PixiJS canvas within the viewport */
+#app {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Optionally set a background color or image for the webpage */
+body {
+  background-color: #f0f0f0; /* Replace with your desired background color */
+  /* background-image: url('your-background-image.jpg'); */ /* Uncomment and specify your background image URL */
+  background-size: cover; /* Adjust as needed */
+  background-repeat: no-repeat;
+  background-position: center center;
 }
