@@ -5,16 +5,17 @@ const app = new PIXI.Application({
     // resizeTo: window,
     width: window.innerWidth,
     height: window.innerHeight,
-    transparent: true,
+    backgroundColor: 0x191970,
+    // transparent: true,
 });
 
 document.body.appendChild(app.view);
 
-const background = new PIXI.Sprite(PIXI.Texture.from('background.png'));
-background.anchor.set(0.5);
-background.x = app.screen.width / 2;
-background.y = app.screen.height / 2;
-app.stage.addChild(background);
+// const background = new PIXI.Sprite(PIXI.Texture.from('background.png'));
+// background.anchor.set(0.5);
+// background.x = app.screen.width / 2;
+// background.y = app.screen.height / 2;
+// app.stage.addChild(background);
 
 const character = new PIXI.Sprite(PIXI.Texture.from('taihou.png'));
 character.anchor.set(0.5);
