@@ -2,7 +2,9 @@ import './style.css'
 import * as PIXI from 'pixi.js';
 
 const app = new PIXI.Application({
-    resizeTo: window,
+    // resizeTo: window,
+    width: innerWidth,
+    height: innerHeight,
     transparent: true,
 });
 
