@@ -3,8 +3,8 @@ import * as PIXI from 'pixi.js';
 
 const app = new PIXI.Application({
     // resizeTo: window,
-    width: innerWidth,
-    height: innerHeight,
+    width: window.innerWidth,
+    height: window.innerHeight,
     transparent: true,
 });
 
