@@ -20,6 +20,12 @@ character.x = app.screen.width / 2;
 character.y = app.screen.height / 2;
 app.stage.addChild(character);
 
+const githubClickableSprite = new PIXI.Sprite(PIXI.Texture.from('github-mark-white.png'));
+githubClickableSprite.anchor.set(0.5);
+githubClickableSprite.x = app.screen.width / 2 + 100;
+githubClickableSprite.y = app.screen.height / 2 + 200;
+app.stage.addChild(githubClickableSprite);
+
 // Define the character's speed
 const characterSpeed = 5;
 
@@ -35,13 +41,7 @@ window.addEventListener('keyup', (e) => {
     keys[e.key] = false;
 });
 
-const githubClickableSprite = new PIXI.Sprite(PIXI.Texture.from('github-mark-white.png'));
-githubClickableSprite.anchor.set(0.5);
-githubClickableSprite.x = app.screen.width / 2 + 100;
-githubClickableSprite.y = app.screen.height / 2 + 200;
-app.stage.addChild(githubClickableSprite);
-
-const proximityThreshold = 10; // Adjust this value as needed
+const proximityThreshold = 100; // Adjust this value as needed
 const targetLocation = { x: githubClickableSprite.x, y: githubClickableSprite.y }; // Replace with your target coordinates
 
 function isPlayerNearLocation(playerX, playerY, targetX, targetY) {
@@ -49,13 +49,18 @@ function isPlayerNearLocation(playerX, playerY, targetX, targetY) {
     return distance < proximityThreshold;
 }
 
-githubClickableSprite.interactive = true;
-githubClickableSprite.buttonMode = true;
+const updateClickable = (sprite, boolean) => {
+    sprite.visible = boolean;
+    sprite.interactive = boolean;
+    sprite.buttonMode = boolean;
+    if (boolean) {
+        sprite.cursor = 'pointer';
+    }
+}
 
 githubClickableSprite.on('pointerdown', () => {
     // Handle the click event here
     window.location.href = 'https://github.com/TaihouAnF';
-    // console.log('Clickable sprite clicked!');
 });
 
 // Create a game loop to update character position
@@ -80,6 +85,6 @@ app.ticker.add(() => {
     const playerNearLocation = isPlayerNearLocation(character.x, character.y, targetLocation.x, targetLocation.y);
 
     // Show or hide clickable sprites accordingly
-    clickableSprite.visible = playerNearLocation;
+    updateClickable(githubClickableSprite, playerNearLocation);
 });
 
