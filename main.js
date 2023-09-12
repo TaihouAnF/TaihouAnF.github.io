@@ -51,44 +51,41 @@ const handleControl = () => {
     }
 }
 
-const spriteSetup = (sprite, visible, targetLocation) => {
+const spriteSetup = (sprite, visible, scaleX, scaleY, targetLocation) => {
     sprite.anchor.set(0.5);
     sprite.visible = visible;
-    // sprite.scale.x = scale;
-    // sprite.scale.y = scale;
+    sprite.scale.x = scaleX;
+    sprite.scale.y = scaleY;
     sprite.x = targetLocation.x;
     sprite.y = targetLocation.y;
     app.stage.addChild(sprite);
 };
 
-const spriteScaling = (sprite, width, height) => {
-    sprite.width = width;
-    sprite.height = height;
-}
+// const spriteScaling = (sprite, width, height) => {
+//     sprite.width = width;
+//     sprite.height = height;
+// }
 
 const targetGithub = { x: app.screen.width / 4, y: 3 * app.screen.height / 4 };
 
 const githubSpriteWhite = new PIXI.Sprite(PIXI.Texture.from('github-mark-white.png'));
-spriteSetup(githubSpriteWhite, false, targetGithub);
-// spriteScaling(githubSpriteWhite, commonWidth, commonHeight);
-githubSpriteWhite.scale.x = 0.5;
-githubSpriteWhite.scale.y = 0.5;
+spriteSetup(githubSpriteWhite, false, targetGithub, 0.5, 0.5);
+
 
 const githubSpriteDark = new PIXI.Sprite(PIXI.Texture.from('github-mark.png'));
-spriteSetup(githubSpriteDark, true, targetGithub);
-// spriteScaling(githubSpriteDark, commonWidth, commonHeight);
-githubSpriteDark.scale.x = 0.5;
-githubSpriteDark.scale.y = 0.5;
+spriteSetup(githubSpriteDark, true, targetGithub, 0.5, 0.5);
 
 const targetLinkedIn = { x: app.screen.width / 2, y: 3 * app.screen.height / 4 };
 
 const linkedInSpriteWhite = new PIXI.Sprite(PIXI.Texture.from('LinkedIn-White.png'));
-spriteSetup(linkedInSpriteWhite, false, targetLinkedIn);
-spriteScaling(linkedInSpriteWhite, githubSpriteWhite.width, githubSpriteWhite.height);
+const commonFactorX = githubSpriteWhite.width / linkedInSpriteWhite.width;
+const commonFactorY = githubSpriteWhite.height / linkedInSpriteWhite.height;
+spriteSetup(linkedInSpriteWhite, false, commonFactorX, commonFactorY, targetLinkedIn);
+// spriteScaling(linkedInSpriteWhite, githubSpriteWhite.width, githubSpriteWhite.height);
 
 const linkedInSpriteDark = new PIXI.Sprite(PIXI.Texture.from('LinkedIn-Dark.png'));
-spriteSetup(linkedInSpriteDark, true, targetLinkedIn);
-spriteScaling(linkedInSpriteDark, githubSpriteDark.width, githubSpriteDark.height);
+spriteSetup(linkedInSpriteDark, true, commonFactorX, commonFactorY, targetLinkedIn);
+// spriteScaling(linkedInSpriteDark, githubSpriteDark.width, githubSpriteDark.height);
 
 
 const proximityThreshold = 100; // Adjust this value as needed
@@ -105,7 +102,7 @@ const updateClickable = (sprite1, sprite2, boolean, url) => {
     
     if (boolean) {
         sprite1.cursor = 'pointer';
-        sprite1.on('pointerdown', () => {
+        sprite1.on('pointertap', () => {
             // Handle the click event here
             window.location.href = url;
         });
