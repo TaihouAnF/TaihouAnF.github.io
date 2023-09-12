@@ -49,30 +49,32 @@ const handleControl = () => {
     }
 }
 
-// const githubIconContainer = new PIXI.Container();
-// githubIconContainer.anchor.set(0.5);
-// githubIconContainer.x = app.screen.width / 4;
-// githubIconContainer.y = 3 * app.screen.height / 4;
-// app.stage.addChild(githubIconContainer);
 const targetGithub = { x: app.screen.width / 4, y: 3 * app.screen.height / 4 };
 
+const spriteSetup = (sprite, visible, targetLocation) => {
+    sprite.anchor.set(0.5);
+    sprite.visible = visible;
+    sprite.x = targetLocation.x;
+    sprite.y = targetLocation.y;
+    app.stage.addChild(sprite);
+};
+
 const githubSpriteWhite = new PIXI.Sprite(PIXI.Texture.from('github-mark-white.png'));
-githubSpriteWhite.anchor.set(0.5);
-githubSpriteWhite.visible = false;
-githubSpriteWhite.x = targetGithub.x;
-githubSpriteWhite.y = targetGithub.y;
-// githubIconContainer.addChild(githubSpriteWhite);
-app.stage.addChild(githubSpriteWhite);
-// githubSpriteWhite.position.set(0, 0);
+// githubSpriteWhite.anchor.set(0.5);
+// githubSpriteWhite.visible = false;
+// githubSpriteWhite.x = targetGithub.x;
+// githubSpriteWhite.y = targetGithub.y;
+// app.stage.addChild(githubSpriteWhite);
+spriteSetup(githubSpriteWhite, false, targetGithub);
 
 const githubSpriteDark = new PIXI.Sprite(PIXI.Texture.from('github-mark.png'));
-githubSpriteDark.anchor.set(0.5);
-githubSpriteDark.visible = true;
-githubSpriteDark.x = targetGithub.x;
-githubSpriteDark.y = targetGithub.y;
-// githubIconContainer.addChild(githubSpriteDark);
-app.stage.addChild(githubSpriteDark);
-// githubSpriteDark.position.set(0, 0);
+// githubSpriteDark.anchor.set(0.5);
+// githubSpriteDark.visible = true;
+// githubSpriteDark.x = targetGithub.x;
+// githubSpriteDark.y = targetGithub.y;
+// app.stage.addChild(githubSpriteDark);
+spriteSetup(githubSpriteDark, true, targetGithub);
+
 
 
 
@@ -84,13 +86,17 @@ function isPlayerNearLocation(playerX, playerY, targetX, targetY) {
     return distance < proximityThreshold;
 }
 
-const updateClickable = (sprite1, sprite2, boolean) => {
+const updateClickable = (sprite1, sprite2, boolean, url) => {
     sprite1.visible = boolean;
     sprite1.interactive = boolean;
     sprite1.buttonMode = boolean;
     
     if (boolean) {
         sprite1.cursor = 'pointer';
+        githubSpriteWhite.on('pointerdown', () => {
+            // Handle the click event here
+            window.location.href = url;'https://github.com/TaihouAnF'
+        });
     } 
     else {
         sprite2.cursor = 'default';
@@ -99,28 +105,10 @@ const updateClickable = (sprite1, sprite2, boolean) => {
     sprite2.visible = !boolean;
 }
 
-githubSpriteWhite.on('pointerdown', () => {
-    // Handle the click event here
-    window.location.href = 'https://github.com/TaihouAnF';
-});
+
 
 // Create a game loop to update character position
 app.ticker.add(() => {
-    // if (keys['w'] || keys['ArrowUp']) {
-    //     character.y -= characterSpeed;
-    // }
-
-    // if (keys['s'] || keys['ArrowDown']) {
-    //     character.y += characterSpeed;
-    // }
-
-    // if (keys['a'] || keys['ArrowLeft']) {
-    //     character.x -= characterSpeed;
-    // }
-
-    // if (keys['d'] || keys['ArrowRight']) {
-    //     character.x += characterSpeed;
-    // }
     handleControl();
 
     // Check player's proximity to the target location
@@ -128,7 +116,7 @@ app.ticker.add(() => {
     // const playerNearLocationLinkedIn = isPlayerNearLocation(character.x, character.y, targetLocation.x, targetLocation.y);
     // const playerNearLocationItchio = isPlayerNearLocation(character.x, character.y, targetLocation.x, targetLocation.y);
     // Show or hide clickable sprites accordingly
-    updateClickable(githubSpriteWhite, githubSpriteDark, playerNearLocationGithub);
+    updateClickable(githubSpriteWhite, githubSpriteDark, playerNearLocationGithub, 'https://github.com/TaihouAnF');
     // updateClickable(githubClickableSprite, playerNearLocation);
     // updateClickable(githubClickableSprite, playerNearLocation);
 });
