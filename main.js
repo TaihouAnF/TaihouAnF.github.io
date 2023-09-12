@@ -113,9 +113,12 @@ app.ticker.add(() => {
     handleControl();
 
     // Check player's proximity to the target location
-    const playerNearLocationGithub = isPlayerNearLocation(character, targetGithub);
-    const playerNearLocationLinkedIn = isPlayerNearLocation(character, targetLinkedIn);
-    const playerNearLocationItchio = isPlayerNearLocation(character, targetItchio);
+    let curtargetGithub = { x: app.screen.width / 4, y: 3 * app.screen.height / 4 };
+    let curtargetLinkedIn = { x: app.screen.width / 2, y: 3 * app.screen.height / 4 };
+    let curtargetItchio = { x: 3 * app.screen.width / 4, y: 3 * app.screen.height / 4 };
+    const playerNearLocationGithub = isPlayerNearLocation(character, curtargetGithub);
+    const playerNearLocationLinkedIn = isPlayerNearLocation(character, curtargetLinkedIn);
+    const playerNearLocationItchio = isPlayerNearLocation(character, curtargetItchio);
     // Show or hide clickable sprites accordingly
     updateClickable(githubSpriteWhite, githubSpriteDark, playerNearLocationGithub, 'https://github.com/TaihouAnF');
     updateClickable(linkedInSpriteWhite, linkedInSpriteDark, playerNearLocationLinkedIn, 'https://www.linkedin.com/in/anson-feng/');
@@ -123,14 +126,14 @@ app.ticker.add(() => {
 });
 
 window.addEventListener('resize', () => {
-    if (window.innerWidth >= 800 && window.innerHeight >= 600) {
-        app.renderer.resize(window.innerWidth, window.innerHeight);
-        character.position.set(app.screen.width / 8, app.screen.height / 4);
-        githubSpriteDark.position.set(app.screen.width / 4, 3 * app.screen.height / 4);
-        githubSpriteWhite.position.set(app.screen.width / 4, 3 * app.screen.height / 4);
-        linkedInSpriteDark.position.set(app.screen.width / 2, 3 * app.screen.height / 4);
-        linkedInSpriteWhite.position.set(app.screen.width / 2, 3 * app.screen.height / 4);
-        itchioSpriteDark.position.set(3 * app.screen.width / 4, 3 * app.screen.height / 4);
-        itchioSpriteWhite.position.set(3 * app.screen.width / 4, 3 * app.screen.height / 4);
-    }
+if (window.innerWidth >= 800 && window.innerHeight >= 600) {
+    app.renderer.resize(window.innerWidth, window.innerHeight);
+    character.position.set(app.screen.width / 8, app.screen.height / 4);
+    githubSpriteDark.position.set(app.screen.width / 4, 3 * app.screen.height / 4);
+    githubSpriteWhite.position.set(app.screen.width / 4, 3 * app.screen.height / 4);
+    linkedInSpriteDark.position.set(app.screen.width / 2, 3 * app.screen.height / 4);
+    linkedInSpriteWhite.position.set(app.screen.width / 2, 3 * app.screen.height / 4);
+    itchioSpriteDark.position.set(3 * app.screen.width / 4, 3 * app.screen.height / 4);
+    itchioSpriteWhite.position.set(3 * app.screen.width / 4, 3 * app.screen.height / 4);
+}
 });
