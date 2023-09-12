@@ -51,31 +51,44 @@ const handleControl = () => {
     }
 }
 
-const spriteSetup = (sprite, visible, targetLocation, scale) => {
+const spriteSetup = (sprite, visible, targetLocation) => {
     sprite.anchor.set(0.5);
     sprite.visible = visible;
-    sprite.scale.x = scale;
-    sprite.scale.y = scale;
+    // sprite.scale.x = scale;
+    // sprite.scale.y = scale;
     sprite.x = targetLocation.x;
     sprite.y = targetLocation.y;
     app.stage.addChild(sprite);
 };
 
+const spriteScaling = (sprite, scaleX, scaleY) => {
+    sprite.scale.x = scaleX;
+    sprite.scale.y = scaleY;
+}
+
 const targetGithub = { x: app.screen.width / 4, y: 3 * app.screen.height / 4 };
 
 const githubSpriteWhite = new PIXI.Sprite(PIXI.Texture.from('github-mark-white.png'));
-spriteSetup(githubSpriteWhite, false, targetGithub, 0.5);
+spriteSetup(githubSpriteWhite, false, targetGithub);
+spriteScaling(githubSpriteWhite, 0.5, 0.5);
 
 const githubSpriteDark = new PIXI.Sprite(PIXI.Texture.from('github-mark.png'));
-spriteSetup(githubSpriteDark, true, targetGithub, 0.5);
+spriteSetup(githubSpriteDark, true, targetGithub);
+spriteScaling(githubSpriteDark, 0.5, 0.5);
 
 const targetLinkedIn = { x: app.screen.width / 2, y: 3 * app.screen.height / 4 };
 
 const linkedInSpriteWhite = new PIXI.Sprite(PIXI.Texture.from('LinkedIn-White.png'));
-spriteSetup(linkedInSpriteWhite, false, targetLinkedIn, 0.5);
+const linkedinWhiteScaleFactorX = githubSpriteWhite.width / linkedInSpriteWhite.width; 
+const linkedinWhiteScaleFactorY = githubSpriteWhite.height / linkedInSpriteWhite.height;
+spriteSetup(linkedInSpriteWhite, false, targetLinkedIn);
+spriteScaling(linkedInSpriteWhite, linkedinWhiteScaleFactorX, linkedinWhiteScaleFactorY);
 
 const linkedInSpriteDark = new PIXI.Sprite(PIXI.Texture.from('LinkedIn-Dark.png'));
-spriteSetup(linkedInSpriteDark, true, targetLinkedIn, 0.5);
+const linkedinDarkScaleFactorX = githubSpriteDark.width / linkedInSpriteDark.width; 
+const linkedinDarkScaleFactorY = githubSpriteDark.height / linkedInSpriteDark.height;
+spriteSetup(linkedInSpriteDark, true, targetLinkedIn);
+spriteScaling(linkedInSpriteDark, linkedinDarkScaleFactorX, linkedinDarkScaleFactorY);
 
 
 const proximityThreshold = 100; // Adjust this value as needed
