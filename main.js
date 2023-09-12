@@ -70,23 +70,25 @@ const targetGithub = { x: app.screen.width / 4, y: 3 * app.screen.height / 4 };
 
 const githubSpriteWhite = new PIXI.Sprite(PIXI.Texture.from('github-mark-white.png'));
 spriteSetup(githubSpriteWhite, false, targetGithub);
-const commonWidth = 0.5 * githubSpriteWhite.width;
-const commonHeight = 0.5 * githubSpriteWhite.height;
-spriteScaling(githubSpriteWhite, commonWidth, commonHeight);
+// spriteScaling(githubSpriteWhite, commonWidth, commonHeight);
+githubSpriteWhite.scale.x = 0.5;
+githubSpriteWhite.scale.y = 0.5;
 
 const githubSpriteDark = new PIXI.Sprite(PIXI.Texture.from('github-mark.png'));
 spriteSetup(githubSpriteDark, true, targetGithub);
-spriteScaling(githubSpriteDark, commonWidth, commonHeight);
+// spriteScaling(githubSpriteDark, commonWidth, commonHeight);
+githubSpriteDark.scale.x = 0.5;
+githubSpriteDark.scale.y = 0.5;
 
 const targetLinkedIn = { x: app.screen.width / 2, y: 3 * app.screen.height / 4 };
 
 const linkedInSpriteWhite = new PIXI.Sprite(PIXI.Texture.from('LinkedIn-White.png'));
 spriteSetup(linkedInSpriteWhite, false, targetLinkedIn);
-spriteScaling(linkedInSpriteWhite, commonWidth, commonHeight);
+spriteScaling(linkedInSpriteWhite, githubSpriteWhite.width, githubSpriteWhite.height);
 
 const linkedInSpriteDark = new PIXI.Sprite(PIXI.Texture.from('LinkedIn-Dark.png'));
 spriteSetup(linkedInSpriteDark, true, targetLinkedIn);
-spriteScaling(linkedInSpriteDark, commonWidth, commonHeight);
+spriteScaling(linkedInSpriteDark, githubSpriteDark.width, githubSpriteDark.height);
 
 
 const proximityThreshold = 100; // Adjust this value as needed
