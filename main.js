@@ -9,13 +9,23 @@ const app = new PIXI.Application({
 
 document.body.appendChild(app.view);
 
+const spriteSetLocation = (sprite, targetLocation) => {
+    sprite.x = targetLocation.x;
+    sprite.y = targetLocation.y;
+}
+
+const spriteSetup = (sprite, visible, scaleX, scaleY, targetLocation) => {
+    sprite.anchor.set(0.5);
+    sprite.visible = visible;
+    sprite.scale.x = scaleX;
+    sprite.scale.y = scaleY;
+    spriteSetLocation(sprite, targetLocation);
+    app.stage.addChild(sprite);
+};
+
+const characterLocation = { x: app.screen.width / 8, y: app.screen.height / 4 };
 const character = new PIXI.Sprite(PIXI.Texture.from('taihou.png'));
-character.anchor.set(0.5);
-character.scale.x = 0.5;
-character.scale.y = 0.5;
-character.x = app.screen.width / 8;
-character.y = app.screen.height / 4;
-app.stage.addChild(character);
+spriteSetup(character, true, 0.5, 0.5, characterLocation);
 
 // Define the character's speed
 const characterSpeed = 10;
@@ -50,16 +60,6 @@ const handleControl = () => {
         character.x += characterSpeed;
     }
 }
-
-const spriteSetup = (sprite, visible, scaleX, scaleY, targetLocation) => {
-    sprite.anchor.set(0.5);
-    sprite.visible = visible;
-    sprite.scale.x = scaleX;
-    sprite.scale.y = scaleY;
-    sprite.x = targetLocation.x;
-    sprite.y = targetLocation.y;
-    app.stage.addChild(sprite);
-};
 
 const targetGithub = { x: app.screen.width / 4, y: 3 * app.screen.height / 4 };
 const githubSpriteWhite = new PIXI.Sprite(PIXI.Texture.from('Github-White.png'));
@@ -122,3 +122,13 @@ app.ticker.add(() => {
     updateClickable(itchioSpriteWhite, itchioSpriteDark, playerNearLocationItchio, 'https://taihoudesu.itch.io/');
 });
 
+window.addEventListener('resize', () => {
+    app.resizeTo(window);
+    spriteSetLocation(character, characterLocation);
+    spriteSetLocation(githubSpriteDark, targetGithub);
+    spriteSetLocation(githubSpriteWhite, targetGithub);
+    spriteSetLocation(linkedInSpriteDark, targetLinkedIn);
+    spriteSetLocation(linkedInSpriteWhite, targetLinkedIn);
+    spriteSetLocation(itchioSpriteDark, targetItchio);
+    spriteSetLocation(itchioSpriteWhite, targetItchio);
+})
