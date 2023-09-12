@@ -19,15 +19,22 @@ document.body.appendChild(app.view);
 
 const character = new PIXI.Sprite(PIXI.Texture.from('taihou.png'));
 character.anchor.set(0.5);
-character.x = app.screen.width / 2;
-character.y = app.screen.height / 2;
+character.x = app.screen.width / 8;
+character.y = app.screen.height / 4;
 app.stage.addChild(character);
+
+const githubgithubIconContainer = new PIXI.Container();
+githubIconContainer.anchor.set(0.5);
+githubgithubIconContainer.x = app.screen.width / 4;
+githubIconContainer.y = 3 * app.screen.height / 4;
+app.stage.addChild(githubIconContainer);
 
 const githubClickableSprite = new PIXI.Sprite(PIXI.Texture.from('github-mark-white.png'));
 githubClickableSprite.anchor.set(0.5);
-githubClickableSprite.x = app.screen.width / 2 + 100;
-githubClickableSprite.y = app.screen.height / 2 + 200;
-app.stage.addChild(githubClickableSprite);
+// githubClickableSprite.x = app.screen.width / 2 + 100;
+// githubClickableSprite.y = app.screen.height / 2 + 200;
+githubIconContainer.addChild(githubClickableSprite);
+githubClickableSprite.position.set(0, 0)
 
 // Define the character's speed
 const characterSpeed = 5;
@@ -45,7 +52,6 @@ window.addEventListener('keyup', (e) => {
 });
 
 const proximityThreshold = 100; // Adjust this value as needed
-const targetLocation = { x: githubClickableSprite.x, y: githubClickableSprite.y }; // Replace with your target coordinates
 
 function isPlayerNearLocation(playerX, playerY, targetX, targetY) {
     const distance = Math.sqrt(Math.pow(playerX - targetX, 2) + Math.pow(playerY - targetY, 2));
