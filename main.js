@@ -15,24 +15,30 @@ character.x = app.screen.width / 8;
 character.y = app.screen.height / 4;
 app.stage.addChild(character);
 
-const githubgithubIconContainer = new PIXI.Container();
-githubIconContainer.anchor.set(0.5);
-githubgithubIconContainer.x = app.screen.width / 4;
-githubIconContainer.y = 3 * app.screen.height / 4;
-app.stage.addChild(githubIconContainer);
+// const githubIconContainer = new PIXI.Container();
+// githubIconContainer.anchor.set(0.5);
+// githubIconContainer.x = app.screen.width / 4;
+// githubIconContainer.y = 3 * app.screen.height / 4;
+// app.stage.addChild(githubIconContainer);
+const targetGithub = { x: app.screen.width / 4, y: 3 * app.screen.height / 4 };
 
 const githubSpriteWhite = new PIXI.Sprite(PIXI.Texture.from('github-mark-white.png'));
-
 githubSpriteWhite.anchor.set(0.5);
 githubSpriteWhite.visible = false;
-githubIconContainer.addChild(githubClickableSprite);
-githubSpriteWhite.position.set(0, 0)
+githubSpriteWhite.x = targetGithub.x;
+githubSpriteWhite.y = targetGithub.y;
+// githubIconContainer.addChild(githubSpriteWhite);
+app.stage.addChild(githubSpriteWhite);
+// githubSpriteWhite.position.set(0, 0);
 
-const githubSpriteDark = new PIXI.Sprite(PIXI.Texture.FROM('github-mark.png'));
+const githubSpriteDark = new PIXI.Sprite(PIXI.Texture.from('github-mark.png'));
 githubSpriteDark.anchor.set(0.5);
 githubSpriteDark.visible = true;
-githubIconContainer.addChild(githubSpriteDark);
-githubSpriteDark.position.set(0, 0);
+githubSpriteDark.x = targetGithub.x;
+githubSpriteDark.y = targetGithub.y;
+// githubIconContainer.addChild(githubSpriteDark);
+app.stage.addChild(githubSpriteDark);
+// githubSpriteDark.position.set(0, 0);
 
 // Define the character's speed
 const characterSpeed = 5;
@@ -49,23 +55,23 @@ window.addEventListener('keyup', (e) => {
     keys[e.key] = false;
 });
 
-const handleControl = () => {
-    if (keys['w'] || keys['ArrowUp']) {
-        character.y -= characterSpeed;
-    }
+// const handleControl = () => {
+//     if (keys['w'] || keys['ArrowUp']) {
+//         character.y -= characterSpeed;
+//     }
 
-    if (keys['s'] || keys['ArrowDown']) {
-        character.y += characterSpeed;
-    }
+//     if (keys['s'] || keys['ArrowDown']) {
+//         character.y += characterSpeed;
+//     }
 
-    if (keys['a'] || keys['ArrowLeft']) {
-        character.x -= characterSpeed;
-    }
+//     if (keys['a'] || keys['ArrowLeft']) {
+//         character.x -= characterSpeed;
+//     }
 
-    if (keys['d'] || keys['ArrowRight']) {
-        character.x += characterSpeed;
-    }
-}
+//     if (keys['d'] || keys['ArrowRight']) {
+//         character.x += characterSpeed;
+//     }
+// }
 
 const proximityThreshold = 100; // Adjust this value as needed
 
@@ -81,11 +87,12 @@ const updateClickable = (sprite1, sprite2, boolean) => {
     
     if (boolean) {
         sprite1.cursor = 'pointer';
+    } 
+    else {
+        sprite2.cursor = 'default';
     }
 
     sprite2.visible = !boolean;
-    sprite2.interactive = !boolean;
-    sprite2.buttonMode = !boolean;
 }
 
 githubSpriteWhite.on('pointerdown', () => {
@@ -95,25 +102,25 @@ githubSpriteWhite.on('pointerdown', () => {
 
 // Create a game loop to update character position
 app.ticker.add(() => {
-    // if (keys['w'] || keys['ArrowUp']) {
-    //     character.y -= characterSpeed;
-    // }
+    if (keys['w'] || keys['ArrowUp']) {
+        character.y -= characterSpeed;
+    }
 
-    // if (keys['s'] || keys['ArrowDown']) {
-    //     character.y += characterSpeed;
-    // }
+    if (keys['s'] || keys['ArrowDown']) {
+        character.y += characterSpeed;
+    }
 
-    // if (keys['a'] || keys['ArrowLeft']) {
-    //     character.x -= characterSpeed;
-    // }
+    if (keys['a'] || keys['ArrowLeft']) {
+        character.x -= characterSpeed;
+    }
 
-    // if (keys['d'] || keys['ArrowRight']) {
-    //     character.x += characterSpeed;
-    // }
-    handleControl();
+    if (keys['d'] || keys['ArrowRight']) {
+        character.x += characterSpeed;
+    }
+    // handleControl();
 
     // Check player's proximity to the target location
-    const playerNearLocationGithub = isPlayerNearLocation(character.x, character.y, githubgithubIconContainer.x, githubgithubIconContainer.y);
+    const playerNearLocationGithub = isPlayerNearLocation(character.x, character.y, targetGithub.x, targetGithub.y);
     // const playerNearLocationLinkedIn = isPlayerNearLocation(character.x, character.y, targetLocation.x, targetLocation.y);
     // const playerNearLocationItchio = isPlayerNearLocation(character.x, character.y, targetLocation.x, targetLocation.y);
     // Show or hide clickable sprites accordingly
