@@ -61,37 +61,31 @@ const spriteSetup = (sprite, visible, scaleX, scaleY, targetLocation) => {
     app.stage.addChild(sprite);
 };
 
-// const spriteScaling = (sprite, width, height) => {
-//     sprite.width = width;
-//     sprite.height = height;
-// }
-
 const targetGithub = { x: app.screen.width / 4, y: 3 * app.screen.height / 4 };
+const githubSpriteWhite = new PIXI.Sprite(PIXI.Texture.from('Github-White.png'));
+spriteSetup(githubSpriteWhite, false, 0.5, 0.5, targetGithub);
+const githubSpriteDark = new PIXI.Sprite(PIXI.Texture.from('Github-Dark.png'));
+spriteSetup(githubSpriteDark, true, 0.5, 0.5, targetGithub);
 
-const githubSpriteWhite = new PIXI.Sprite(PIXI.Texture.from('github-mark-white.png'));
-spriteSetup(githubSpriteWhite, false, targetGithub, 0.5, 0.5);
-
-
-const githubSpriteDark = new PIXI.Sprite(PIXI.Texture.from('github-mark.png'));
-spriteSetup(githubSpriteDark, true, targetGithub, 0.5, 0.5);
 
 const targetLinkedIn = { x: app.screen.width / 2, y: 3 * app.screen.height / 4 };
-
 const linkedInSpriteWhite = new PIXI.Sprite(PIXI.Texture.from('LinkedIn-White.png'));
-const commonFactorX = githubSpriteWhite.width / linkedInSpriteWhite.width;
-const commonFactorY = githubSpriteWhite.height / linkedInSpriteWhite.height;
-spriteSetup(linkedInSpriteWhite, false, commonFactorX, commonFactorY, targetLinkedIn);
-// spriteScaling(linkedInSpriteWhite, githubSpriteWhite.width, githubSpriteWhite.height);
-
+spriteSetup(linkedInSpriteWhite, false, 0.5, 0.5, targetLinkedIn);
 const linkedInSpriteDark = new PIXI.Sprite(PIXI.Texture.from('LinkedIn-Dark.png'));
-spriteSetup(linkedInSpriteDark, true, commonFactorX, commonFactorY, targetLinkedIn);
-// spriteScaling(linkedInSpriteDark, githubSpriteDark.width, githubSpriteDark.height);
+spriteSetup(linkedInSpriteDark, true, 0.5, 0.5, targetLinkedIn);
+
+const targetItchio = { x: 3 * app.screen.width / 4, y: 3 * app.screen.height / 4 };
+const itchioSpriteWhite = new PIXI.Sprite(PIXI.Texture.from('Itchio-White.png'));
+spriteSetup(itchioSpriteWhite, false, 0.5, 0.5, targetItchio);
+const itchioSpriteDark = new PIXI.Sprite(PIXI.Texture.from('Itchio-Dark.png'));
+spriteSetup(itchioSpriteDark, true, 0.5, 0.5, targetItchio);
+
 
 
 const proximityThreshold = 100; // Adjust this value as needed
 
-function isPlayerNearLocation(playerX, playerY, targetX, targetY) {
-    const distance = Math.sqrt(Math.pow(playerX - targetX, 2) + Math.pow(playerY - targetY, 2));
+function isPlayerNearLocation(character, target) {
+    const distance = Math.sqrt(Math.pow(character.x - target.x, 2) + Math.pow(character.y - target.y, 2));
     return distance < proximityThreshold;
 }
 
@@ -119,12 +113,12 @@ app.ticker.add(() => {
     handleControl();
 
     // Check player's proximity to the target location
-    const playerNearLocationGithub = isPlayerNearLocation(character.x, character.y, targetGithub.x, targetGithub.y);
-    const playerNearLocationLinkedIn = isPlayerNearLocation(character.x, character.y, targetLinkedIn.x, targetLinkedIn.y);
-    // const playerNearLocationItchio = isPlayerNearLocation(character.x, character.y, targetLocation.x, targetLocation.y);
+    const playerNearLocationGithub = isPlayerNearLocation(character, targetGithub);
+    const playerNearLocationLinkedIn = isPlayerNearLocation(character, targetLinkedIn);
+    const playerNearLocationItchio = isPlayerNearLocation(character, targetItchio);
     // Show or hide clickable sprites accordingly
     updateClickable(githubSpriteWhite, githubSpriteDark, playerNearLocationGithub, 'https://github.com/TaihouAnF');
     updateClickable(linkedInSpriteWhite, linkedInSpriteDark, playerNearLocationLinkedIn, 'https://www.linkedin.com/in/anson-feng/');
-    // updateClickable(githubClickableSprite, playerNearLocation);
+    updateClickable(itchioSpriteWhite, itchioSpriteDark, playerNearLocationItchio, 'https://taihoudesu.itch.io/');
 });
 
