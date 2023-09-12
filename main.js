@@ -61,34 +61,32 @@ const spriteSetup = (sprite, visible, targetLocation) => {
     app.stage.addChild(sprite);
 };
 
-const spriteScaling = (sprite, scaleX, scaleY) => {
-    sprite.scale.x = scaleX;
-    sprite.scale.y = scaleY;
+const spriteScaling = (sprite, width, height) => {
+    sprite.width = width;
+    sprite.height = height;
 }
 
 const targetGithub = { x: app.screen.width / 4, y: 3 * app.screen.height / 4 };
 
 const githubSpriteWhite = new PIXI.Sprite(PIXI.Texture.from('github-mark-white.png'));
 spriteSetup(githubSpriteWhite, false, targetGithub);
-spriteScaling(githubSpriteWhite, 0.5, 0.5);
+const commonWidth = 0.5 * githubSpriteWhite.width;
+const commonHeight = 0.5 * githubSpriteWhite.height;
+spriteScaling(githubSpriteWhite, commonWidth, commonHeight);
 
 const githubSpriteDark = new PIXI.Sprite(PIXI.Texture.from('github-mark.png'));
 spriteSetup(githubSpriteDark, true, targetGithub);
-spriteScaling(githubSpriteDark, 0.5, 0.5);
+spriteScaling(githubSpriteDark, commonWidth, commonHeight);
 
 const targetLinkedIn = { x: app.screen.width / 2, y: 3 * app.screen.height / 4 };
 
 const linkedInSpriteWhite = new PIXI.Sprite(PIXI.Texture.from('LinkedIn-White.png'));
-const linkedinWhiteScaleFactorX = githubSpriteWhite.width / linkedInSpriteWhite.width; 
-const linkedinWhiteScaleFactorY = githubSpriteWhite.height / linkedInSpriteWhite.height;
 spriteSetup(linkedInSpriteWhite, false, targetLinkedIn);
-spriteScaling(linkedInSpriteWhite, linkedinWhiteScaleFactorX, linkedinWhiteScaleFactorY);
+spriteScaling(linkedInSpriteWhite, commonWidth, commonHeight);
 
 const linkedInSpriteDark = new PIXI.Sprite(PIXI.Texture.from('LinkedIn-Dark.png'));
-const linkedinDarkScaleFactorX = githubSpriteDark.width / linkedInSpriteDark.width; 
-const linkedinDarkScaleFactorY = githubSpriteDark.height / linkedInSpriteDark.height;
 spriteSetup(linkedInSpriteDark, true, targetLinkedIn);
-spriteScaling(linkedInSpriteDark, linkedinDarkScaleFactorX, linkedinDarkScaleFactorY);
+spriteScaling(linkedInSpriteDark, commonWidth, commonHeight);
 
 
 const proximityThreshold = 100; // Adjust this value as needed
