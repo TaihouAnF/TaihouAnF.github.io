@@ -93,9 +93,9 @@ const updateClickable = (sprite1, sprite2, boolean, url) => {
     
     if (boolean) {
         sprite1.cursor = 'pointer';
-        githubSpriteWhite.on('pointerdown', () => {
+        sprite1.on('pointerdown', () => {
             // Handle the click event here
-            window.location.href = url;'https://github.com/TaihouAnF'
+            window.location.href = url;
         });
     } 
     else {
