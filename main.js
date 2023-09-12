@@ -1,25 +1,25 @@
 import './style.css'
 import * as PIXI from 'pixi.js';
 
+const currentWidth = Math.max(window.innerWidth, 800);
+const currentHeight = Math.max(window.innerHeight, 600);
+
 const app = new PIXI.Application({
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: currentWidth,
+    height: currentHeight,
     backgroundColor: 0x191970,
+    autoResize: true,
+    // resolution: devicePixelRatio
 });
 
 document.body.appendChild(app.view);
-
-const spriteSetLocation = (sprite, targetLocation) => {
-    sprite.x = targetLocation.x;
-    sprite.y = targetLocation.y;
-}
 
 const spriteSetup = (sprite, visible, scaleX, scaleY, targetLocation) => {
     sprite.anchor.set(0.5);
     sprite.visible = visible;
     sprite.scale.x = scaleX;
     sprite.scale.y = scaleY;
-    spriteSetLocation(sprite, targetLocation);
+    sprite.position.set(targetLocation.x, targetLocation.y);
     app.stage.addChild(sprite);
 };
 
@@ -123,12 +123,14 @@ app.ticker.add(() => {
 });
 
 window.addEventListener('resize', () => {
-    app.resizeTo(window);
-    spriteSetLocation(character, characterLocation);
-    spriteSetLocation(githubSpriteDark, targetGithub);
-    spriteSetLocation(githubSpriteWhite, targetGithub);
-    spriteSetLocation(linkedInSpriteDark, targetLinkedIn);
-    spriteSetLocation(linkedInSpriteWhite, targetLinkedIn);
-    spriteSetLocation(itchioSpriteDark, targetItchio);
-    spriteSetLocation(itchioSpriteWhite, targetItchio);
-})
+    if (window.innerWidth >= 800 && window.innerHeight >= 600) {
+        app.renderer.resize(window.innerWidth, window.innerHeight);
+        character.position.set(app.screen.width / 8, app.screen.height / 4);
+        githubSpriteDark.position.set(app.screen.width / 4, 3 * app.screen.height / 4);
+        githubSpriteWhite.position.set(app.screen.width / 4, 3 * app.screen.height / 4);
+        linkedInSpriteDark.position.set(app.screen.width / 2, 3 * app.screen.height / 4);
+        linkedInSpriteWhite.position.set(app.screen.width / 2, 3 * app.screen.height / 4);
+        itchioSpriteDark.position.set(3 * app.screen.width / 4, 3 * app.screen.height / 4);
+        itchioSpriteWhite.position.set(3 * app.screen.width / 4, 3 * app.screen.height / 4);
+    }
+});
