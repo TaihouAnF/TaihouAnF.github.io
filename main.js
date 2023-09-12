@@ -15,6 +15,40 @@ character.x = app.screen.width / 8;
 character.y = app.screen.height / 4;
 app.stage.addChild(character);
 
+// Define the character's speed
+const characterSpeed = 5;
+
+// Create an object to store key states
+const keys = {};
+
+// Listen for keydown and keyup events
+window.addEventListener('keydown', (e) => {
+    keys[e.key] = true;
+});
+
+window.addEventListener('keyup', (e) => {
+    keys[e.key] = false;
+});
+
+
+const handleControl = () => {
+    if (keys['w'] || keys['ArrowUp']) {
+        character.y -= characterSpeed;
+    }
+
+    if (keys['s'] || keys['ArrowDown']) {
+        character.y += characterSpeed;
+    }
+
+    if (keys['a'] || keys['ArrowLeft']) {
+        character.x -= characterSpeed;
+    }
+
+    if (keys['d'] || keys['ArrowRight']) {
+        character.x += characterSpeed;
+    }
+}
+
 // const githubIconContainer = new PIXI.Container();
 // githubIconContainer.anchor.set(0.5);
 // githubIconContainer.x = app.screen.width / 4;
@@ -40,38 +74,8 @@ githubSpriteDark.y = targetGithub.y;
 app.stage.addChild(githubSpriteDark);
 // githubSpriteDark.position.set(0, 0);
 
-// Define the character's speed
-const characterSpeed = 5;
 
-// Create an object to store key states
-const keys = {};
 
-// Listen for keydown and keyup events
-window.addEventListener('keydown', (e) => {
-    keys[e.key] = true;
-});
-
-window.addEventListener('keyup', (e) => {
-    keys[e.key] = false;
-});
-
-// const handleControl = () => {
-//     if (keys['w'] || keys['ArrowUp']) {
-//         character.y -= characterSpeed;
-//     }
-
-//     if (keys['s'] || keys['ArrowDown']) {
-//         character.y += characterSpeed;
-//     }
-
-//     if (keys['a'] || keys['ArrowLeft']) {
-//         character.x -= characterSpeed;
-//     }
-
-//     if (keys['d'] || keys['ArrowRight']) {
-//         character.x += characterSpeed;
-//     }
-// }
 
 const proximityThreshold = 100; // Adjust this value as needed
 
@@ -102,22 +106,22 @@ githubSpriteWhite.on('pointerdown', () => {
 
 // Create a game loop to update character position
 app.ticker.add(() => {
-    if (keys['w'] || keys['ArrowUp']) {
-        character.y -= characterSpeed;
-    }
+    // if (keys['w'] || keys['ArrowUp']) {
+    //     character.y -= characterSpeed;
+    // }
 
-    if (keys['s'] || keys['ArrowDown']) {
-        character.y += characterSpeed;
-    }
+    // if (keys['s'] || keys['ArrowDown']) {
+    //     character.y += characterSpeed;
+    // }
 
-    if (keys['a'] || keys['ArrowLeft']) {
-        character.x -= characterSpeed;
-    }
+    // if (keys['a'] || keys['ArrowLeft']) {
+    //     character.x -= characterSpeed;
+    // }
 
-    if (keys['d'] || keys['ArrowRight']) {
-        character.x += characterSpeed;
-    }
-    // handleControl();
+    // if (keys['d'] || keys['ArrowRight']) {
+    //     character.x += characterSpeed;
+    // }
+    handleControl();
 
     // Check player's proximity to the target location
     const playerNearLocationGithub = isPlayerNearLocation(character.x, character.y, targetGithub.x, targetGithub.y);
