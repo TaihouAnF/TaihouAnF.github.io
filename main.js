@@ -119,8 +119,8 @@ customFont.load().then((font) => {
     
     // Continue with creating text using the custom font
     const text1 = new PIXI.Text('Your text goes here', {
-                fontFamily: 'Pixelfont', // Use the custom font family name
-                fontSize: 100,
+                fontFamily: 'Pixel', // Use the custom font family name
+                fontSize: 10,
                 fill: 0xFFFFFF, // Text color (white in this example)
     });
     text1.anchor.set(0.5);
