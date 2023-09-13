@@ -101,7 +101,7 @@ button:focus-visible {
 body, html {
   margin: 0;
   padding: 0;
-  align-items: center;
+  /* align-items: center; */
   overflow: hidden;
   width: 100vw;
   height: 100vh;
@@ -110,6 +110,7 @@ body, html {
 /* Center the PixiJS canvas within the viewport */
 #app {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
