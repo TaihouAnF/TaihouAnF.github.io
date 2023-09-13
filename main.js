@@ -1,12 +1,12 @@
 import './style.css'
 import * as PIXI from 'pixi.js';
 
-const currentWidth = Math.max(window.innerWidth, 800);
-const currentHeight = Math.max(window.innerHeight, 600);
+const defaultWidth = Math.max(window.innerWidth, 800);
+const defaultHeight = Math.max(window.innerHeight, 600);
 
 const app = new PIXI.Application({
-    width: currentWidth,
-    height: currentHeight,
+    width: defaultWidth,
+    height: defaultHeight,
     backgroundColor: 0x191970,
     autoResize: true,
     // resolution: devicePixelRatio
@@ -126,8 +126,9 @@ app.ticker.add(() => {
 });
 
 window.addEventListener('resize', () => {
-if (window.innerWidth >= 800 && window.innerHeight >= 600) {
-    app.renderer.resize(window.innerWidth, window.innerHeight);
+    const currentWidth = Math.max(window.innerWidth, 800);
+    const currentHeight = Math.max(window.innerHeight, 600);
+    app.renderer.resize(currentWidth, currentHeight);
     character.position.set(app.screen.width / 8, app.screen.height / 4);
     githubSpriteDark.position.set(app.screen.width / 4, 3 * app.screen.height / 4);
     githubSpriteWhite.position.set(app.screen.width / 4, 3 * app.screen.height / 4);
@@ -135,5 +136,4 @@ if (window.innerWidth >= 800 && window.innerHeight >= 600) {
     linkedInSpriteWhite.position.set(app.screen.width / 2, 3 * app.screen.height / 4);
     itchioSpriteDark.position.set(3 * app.screen.width / 4, 3 * app.screen.height / 4);
     itchioSpriteWhite.position.set(3 * app.screen.width / 4, 3 * app.screen.height / 4);
-}
 });
