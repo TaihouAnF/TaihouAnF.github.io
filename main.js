@@ -94,7 +94,6 @@ const updateClickable = (sprite1, sprite2, boolean, url) => {
     sprite1.buttonMode = boolean;
     
     if (boolean) {
-        console.log(boolean);
         sprite1.cursor = 'pointer';
         sprite1.on('pointerdown', () => {
             // Handle the click event here
@@ -107,6 +106,24 @@ const updateClickable = (sprite1, sprite2, boolean, url) => {
 
     sprite2.visible = !boolean;
 }
+
+// Load custom font using the FontFace API
+const PixelFont = new FontFace('PixelFont', 'font/PublicPixel-z84yD.ttf');
+
+PixelFont.load().then((font) => {
+    document.fonts.add(font);
+
+    // Create and style text with the custom font
+    const text = new PIXI.Text('Your text goes here', {
+        fontFamily: 'PixelFont', // Use the custom font family name
+        fontSize: 24,
+        fill: 0xFFFFFF, // Text color (white in this example)
+    });
+
+    // Add the text to the PixiJS stage
+    app.stage.addChild(text);
+});
+
 
 // Create a game loop to update character position
 app.ticker.add(() => {
