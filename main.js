@@ -9,7 +9,6 @@ const app = new PIXI.Application({
     height: defaultHeight,
     backgroundColor: 0x191970,
     autoResize: true,
-    // resolution: devicePixelRatio
 });
 
 document.body.appendChild(app.view);
@@ -95,8 +94,9 @@ const updateClickable = (sprite1, sprite2, boolean, url) => {
     sprite1.buttonMode = boolean;
     
     if (boolean) {
+        console.log(boolean)
         sprite1.cursor = 'pointer';
-        sprite1.on('pointertap', () => {
+        sprite1.on('pointerdown', () => {
             // Handle the click event here
             window.location.href = url;
         });
