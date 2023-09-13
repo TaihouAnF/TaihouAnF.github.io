@@ -114,14 +114,16 @@ PixelFont.load().then((font) => {
     document.fonts.add(font);
 
     // Create and style text with the custom font
-    const text = new PIXI.Text('Your text goes here', {
+    const text1 = new PIXI.Text('Your text goes here', {
         fontFamily: 'PixelFont', // Use the custom font family name
-        fontSize: 24,
+        fontSize: 100,
         fill: 0xFFFFFF, // Text color (white in this example)
     });
-
+    text1.anchor.set(0.5);
+    text1.x = app.screen.width / 2;
+    text1.y = app.screen.height / 2;
     // Add the text to the PixiJS stage
-    app.stage.addChild(text);
+    app.stage.addChild(text1);
 });
 
 
