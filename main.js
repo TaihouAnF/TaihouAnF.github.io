@@ -1,5 +1,7 @@
 import './style.css'
 import * as PIXI from 'pixi.js';
+import * as FontFace from 'fontfaceobserver';
+
 
 const defaultWidth = Math.max(window.innerWidth, 800);
 const defaultHeight = Math.max(window.innerHeight, 600);
@@ -108,14 +110,14 @@ const updateClickable = (sprite1, sprite2, boolean, url) => {
 }
 
 // Load custom font using the FontFace API
-const PixelFont = new FontFace('PixelFont', 'font/PublicPixel-z84yD.ttf');
+// let FontFaceObserver = require('fontfaceobserver');
 
-PixelFont.load().then((font) => {
-    document.fonts.add(font);
+// let PixelFont = FontFaceObserver('pixel font', {});
 
+// PixelFont.load().then(() => {
     // Create and style text with the custom font
     const text1 = new PIXI.Text('Your text goes here', {
-        fontFamily: 'PixelFont', // Use the custom font family name
+        fontFamily: 'Pixelfont', // Use the custom font family name
         fontSize: 100,
         fill: 0xFFFFFF, // Text color (white in this example)
     });
@@ -124,7 +126,7 @@ PixelFont.load().then((font) => {
     text1.y = app.screen.height / 2;
     // Add the text to the PixiJS stage
     app.stage.addChild(text1);
-});
+// }, () => {});
 
 
 // Create a game loop to update character position
