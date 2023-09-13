@@ -110,23 +110,26 @@ const updateClickable = (sprite1, sprite2, boolean, url) => {
 }
 
 // Load custom font using the FontFace API
-// let FontFaceObserver = require('fontfaceobserver');
+const customFont = new FontFace('Pixel', 'url(pixel.ttf)');
 
-// let PixelFont = FontFaceObserver('pixel font', {});
-
-// PixelFont.load().then(() => {
-    // Create and style text with the custom font
+// Wait for the font to load
+customFont.load().then((font) => {
+    // Add the font to the document's font registry
+    document.fonts.add(font);
+    
+    // Continue with creating text using the custom font
     const text1 = new PIXI.Text('Your text goes here', {
-        fontFamily: 'Pixelfont', // Use the custom font family name
-        fontSize: 100,
-        fill: 0xFFFFFF, // Text color (white in this example)
+                fontFamily: 'Pixelfont', // Use the custom font family name
+                fontSize: 100,
+                fill: 0xFFFFFF, // Text color (white in this example)
     });
     text1.anchor.set(0.5);
     text1.x = app.screen.width / 2;
     text1.y = app.screen.height / 2;
     // Add the text to the PixiJS stage
     app.stage.addChild(text1);
-// }, () => {});
+});
+
 
 
 // Create a game loop to update character position
