@@ -109,12 +109,19 @@ const updateClickable = (sprite1, sprite2, boolean, url) => {
 }
 
     
-    // Continue with creating text using the custom font
+// Continue with creating text using the custom font
     
-const textDummy = new PIXI.HTMLText ("Dummy", {fontFamily: 'Pixelfont'}); // I suspect the issue was loading the font, 
-                                                                          // I put a dummy html text here just for making
-                                                                          // the font work, I don't like this at all.
-textDummy.style.loadFont('font/pixel.ttf', {family: 'Pixelfont'}).then();
+
+
+async function fontsetup() {
+    let textDummy = new PIXI.HTMLText ("Dummy", {fontFamily: 'Pixelfont'}); // I suspect the issue was loading the font, 
+    // I put a dummy html text here just for making
+    // the font work, I don't like this at all.
+    await textDummy.style.loadFont('font/pixel.ttf', {family: 'Pixelfont'});
+    return textDummy;
+}
+
+let dummy = fontsetup();
 
 const textStyle = new PIXI.TextStyle({
         fill: 0xFFFFFF,
