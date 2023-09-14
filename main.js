@@ -1,6 +1,5 @@
 import './style.css'
 import * as PIXI from 'pixi.js';
-import * as FontFace from 'fontfaceobserver';
 
 
 const defaultWidth = Math.max(window.innerWidth, 800);
@@ -109,28 +108,34 @@ const updateClickable = (sprite1, sprite2, boolean, url) => {
     sprite2.visible = !boolean;
 }
 
-// Load custom font using the FontFace API
-const customFont = new FontFace('Pixel', 'url(pixel.ttf)');
-
-// Wait for the font to load
-customFont.load().then((font) => {
-    // Add the font to the document's font registry
-    document.fonts.add(font);
     
     // Continue with creating text using the custom font
-    const text1 = new PIXI.Text('Your text goes here', {
-                fontFamily: 'Pixel', // Use the custom font family name
-                fontSize: 10,
-                fill: 0xFFFFFF, // Text color (white in this example)
-    });
-    text1.anchor.set(0.5);
-    text1.x = app.screen.width / 2;
-    text1.y = app.screen.height / 2;
-    // Add the text to the PixiJS stage
-    app.stage.addChild(text1);
+    
+const textDummy = new PIXI.HTMLText ("Dummy", {fontFamily: 'Pixelfont'}); // I suspect the issue was loading the font, 
+                                                                          // I put a dummy html text here just for making
+                                                                          // the font work, I don't like this at all.
+await textDummy.style.loadFont('font/pixel.ttf', {family: 'Pixelfont'});
+
+const textStyle = new PIXI.TextStyle({
+        fill: 0xFFFFFF,
+        fontSize: 20,
+        fontFamily: "Pixelfont",
+        wordWrap: true,
+        wordWrapWidth: 800,
 });
 
+const textContent1 = "Welcome! I'm Anson/Taihou.\n\n";
+const textContent2 = "I like developing/coding game features \n\nwhile I also enjoy playing games.\n\n";
+const textContent3 = "This is an ongoing project that will be\n\nconstantly updated. And it is a game:\n\n";
+const textContent4 = "1.Use WASD/Arrow keys to move my avatar;\n\n2.Move Close to icons to unlock them;\n\n3.then you can click on them to pass the\n\nportal to find out more about me.";
+const text1 = new PIXI.Text("");
+text1.text = textContent1 + textContent2 + textContent3 + textContent4;
+text1.x = app.screen.width / 4;
+text1.y = app.screen.height / 8;
+text1.style = textStyle;
 
+// Add the text to the PixiJS stage
+app.stage.addChild(text1);
 
 // Create a game loop to update character position
 app.ticker.add(() => {
@@ -160,4 +165,5 @@ window.addEventListener('resize', () => {
     linkedInSpriteWhite.position.set(app.screen.width / 2, 3 * app.screen.height / 4);
     itchioSpriteDark.position.set(3 * app.screen.width / 4, 3 * app.screen.height / 4);
     itchioSpriteWhite.position.set(3 * app.screen.width / 4, 3 * app.screen.height / 4);
+    text1.position.set(app.screen.width / 4, app.screen.height / 8);
 });
